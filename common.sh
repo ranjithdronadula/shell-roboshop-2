@@ -10,7 +10,8 @@
     LOG_FOLDER="/var/log/roboshop.log"
     SCRIPT_NAME="$(echo $0 | cut -d "." f1)"
     LOG_FILE="$LOG_FOLDER/$SCRIPT_NAME.log"
-
+    SCRIPT_DIR=$PWD
+    
     mkdir -p $LOG_FOLDER 
     echo -e "$Y This  script started excuting at :: $(date) $N" | tee -a $LOG_FILE  # THIS COMMAND REFER DISPLY THE CONTEND AND STORE IN LOG_FILE
 
