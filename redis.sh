@@ -1,7 +1,7 @@
 #!/bin/bash
 
 source ./common.sh
-app-name=redis
+app_name=redis
 
 check_root
 
