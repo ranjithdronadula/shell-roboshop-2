@@ -11,7 +11,7 @@
     SCRIPT_NAME="$(echo $0 | cut -d "." f1)"
     LOG_FILE="$LOG_FOLDER/$SCRIPT_NAME.log"
     SCRIPT_DIR=$PWD
-    
+
     mkdir -p $LOG_FOLDER 
     echo -e "$Y This  script started excuting at :: $(date) $N" | tee -a $LOG_FILE  # THIS COMMAND REFER DISPLY THE CONTEND AND STORE IN LOG_FILE
 
@@ -51,6 +51,17 @@
 
     npm install &>>$LOG_FILE
     VALIDATE $? "Installing Dependencies"
+    }
+    
+    maven_setup(){
+    dnf install maven -y &>>$LOG_FILE
+    VALIDATE $? "Installing Maven and Java"
+
+    mvn clean package  &>>$LOG_FILE
+    VALIDATE $? "Packaging the shipping application"
+
+    mv target/shipping-1.0.jar shipping.jar  &>>$LOG_FILE
+    VALIDATE $? "Moving and renaming Jar file"
     }
 
     systemd_setup(){
