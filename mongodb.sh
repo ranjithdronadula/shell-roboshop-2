@@ -24,4 +24,5 @@
     systemctl restart mongod &>>$LOG_FILE
     VALIDATE $? "Restartig MongoDB"
 
+    print_time
         
