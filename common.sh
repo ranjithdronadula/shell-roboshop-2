@@ -23,20 +23,20 @@
         useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOG_FILE
         VALIDATE $? "Creating roboshop system user"
     else
-        echo -e "system user roboshp already created...$Y SKIPPING $N" | tee -a $LOG_FILE  
-    fi  
+        echo -e "System user roboshop already created ... $Y SKIPPING $N"
+    fi
 
     mkdir -p /app 
     VALIDATE $? "Creating app directory"
 
-    curl -o /tmp/app_name.zip https://roboshop-artifacts.s3.amazonaws.com/app_name-v3.zip &>>$LOG_FILE
-    VALIDATE $? "Downloading app_name"
+    curl -o /tmp/$app_name.zip https://roboshop-artifacts.s3.amazonaws.com/$app_name-v3.zip &>>$LOG_FILE
+    VALIDATE $? "Downloading $app_name"
 
-    rm -rf /app/* # BY REMOVING 2ND TIME WE RUN CATALOUGE 1ST CONTENT REMOVE AND 2ND CONTENT DOWNLAOD
+    rm -rf /app/*
     cd /app 
-    unzip /tmp/app_name.zip &>>$LOG_FILE
-    VALIDATE $? "unzipping app_name"
-    }
+    unzip /tmp/$app_name.zip &>>$LOG_FILE
+    VALIDATE $? "unzipping $app_name"
+}
 
     nodejs_setup(){ 
     dnf module disable nodejs -y &>>$LOG_FILE
