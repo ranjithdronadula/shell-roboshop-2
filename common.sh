@@ -63,6 +63,14 @@
     mv target/shipping-1.0.jar shipping.jar  &>>$LOG_FILE
     VALIDATE $? "Moving and renaming Jar file"
     }
+     
+    python3_setup(){ 
+    dnf install python3 gcc python3-devel -y &>>$LOG_FILE
+    VALIDATE $? "Install Python3 packages"
+
+    pip3 install -r requirements.txt &>>$LOG_FILE
+    VALIDATE $? "Installing dependencies"
+    }
 
     systemd_setup(){
     cp $SCRIPT_DIR/$app_name.service /etc/systemd/system/$app_name.service
